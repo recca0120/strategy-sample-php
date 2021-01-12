@@ -2,7 +2,8 @@
 
 namespace TddBest\StrategySamplePhp;
 
-use ValueError;
+// use ValueError;
+use UnexpectedValueException;
 
 class Cart
 {
@@ -40,7 +41,8 @@ class Cart
                 return $feeBySize;
             }
         } else {
-            throw new ValueError('shipper not exist');
+            // throw new ValueError('shipper not exist');
+            throw new UnexpectedValueException('shipper not exist');
         }
     }
 }
