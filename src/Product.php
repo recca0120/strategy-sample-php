@@ -37,4 +37,14 @@ class Product
         $this->height = $height;
         $this->weight = $weight;
     }
+
+    /**
+     * @return float|int
+     */
+    public function size()
+    {
+        $size = $this->length * $this->width * $this->height;
+
+        return $size;
+    }
 }

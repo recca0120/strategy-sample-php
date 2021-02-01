@@ -43,7 +43,7 @@ class Cart
      */
     private function feeByHsinchu(Product $product)
     {
-        $size = $this->size($product);
+        $size = $product->size();
         if ($product->length > 100 || $product->width > 100 || $product->height > 100) {
             return $size * 0.00002 * 1100 + 500;
         } else {
@@ -58,20 +58,10 @@ class Cart
     private function feeByPostOffice(Product $product)
     {
         $feeByWeight = 80 + $product->weight * 10;
-        $size = $this->size($product);
+        $size = $product->size();
         $feeBySize = $size * 0.00002 * 1100;
 
         return min($feeBySize, $feeByWeight);
     }
 
-    /**
-     * @param Product $product
-     * @return float|int
-     */
-    private function size(Product $product)
-    {
-        $size = $product->length * $product->width * $product->height;
-
-        return $size;
-    }
 }
