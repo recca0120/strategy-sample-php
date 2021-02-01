@@ -8,15 +8,11 @@ class Cart
 {
     /**
      * @param string $shipper
-     * @param int $length
-     * @param int $width
-     * @param int $height
-     * @param int $weight
+     * @param Product $product
      * @return float|int
      */
-    public function shippingFee(string $shipper, int $length, int $width, int $height, int $weight)
+    public function shippingFee(string $shipper, Product $product)
     {
-        $product = new Product($length, $width, $height, $weight);
         if ($shipper === 'black cat') {
             if ($product->weight > 20) {
                 return 500;

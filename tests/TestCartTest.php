@@ -4,6 +4,7 @@ namespace TddBest\StrategySamplePhp\Tests;
 
 use PHPUnit\Framework\TestCase;
 use TddBest\StrategySamplePhp\Cart;
+use TddBest\StrategySamplePhp\Product;
 
 class TestCartTest extends TestCase
 {
@@ -70,7 +71,8 @@ class TestCartTest extends TestCase
 
     private function shippingFee(string $shipper, int $length, int $width, int $height, int $weight)
     {
-        $shippingFee = $this->cart->shippingFee($shipper, $length, $width, $height, $weight);
+        $product = new Product($length, $width, $height, $weight);
+        $shippingFee = $this->cart->shippingFee($shipper, $product);
 
         return $shippingFee;
     }
