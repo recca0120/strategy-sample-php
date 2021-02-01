@@ -14,11 +14,7 @@ class Cart
     public function shippingFee(string $shipper, Product $product)
     {
         if ($shipper === 'black cat') {
-            if ($product->weight > 20) {
-                return 500;
-            } else {
-                return 100 + $product->weight * 10;
-            }
+            return $this->feeByBlackCat($product);
         } else if ($shipper === 'hsinchu') {
             $size = $product->length * $product->width * $product->height;
             if ($product->length > 100 || $product->width > 100 || $product->height > 100) {
@@ -34,6 +30,19 @@ class Cart
             return min($feeBySize, $feeByWeight);
         } else {
             throw new UnexpectedValueException('shipper not exist');
+        }
+    }
+
+    /**
+     * @param Product $product
+     * @return float|int
+     */
+    private function feeByBlackCat(Product $product)
+    {
+        if ($product->weight > 20) {
+            return 500;
+        } else {
+            return 100 + $product->weight * 10;
         }
     }
 }
