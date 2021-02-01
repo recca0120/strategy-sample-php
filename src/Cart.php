@@ -34,11 +34,7 @@ class Cart
             $size = $length * $width * $height;
             $feeBySize = $size * 0.00002 * 1100;
 
-            if ($feeByWeight < $feeBySize) {
-                return $feeByWeight;
-            } else {
-                return $feeBySize;
-            }
+            return min($feeBySize, $feeByWeight);
         } else {
             throw new UnexpectedValueException('shipper not exist');
         }
