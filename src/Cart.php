@@ -17,26 +17,22 @@ class Cart
     public function shippingFee(string $shipper, int $length, int $width, int $height, int $weight)
     {
         $product = new Product($length, $width, $height, $weight);
-        $length = $product->length;
-        $width = $product->width;
-        $height = $product->height;
-        $weight = $product->weight;
         if ($shipper === 'black cat') {
-            if ($weight > 20) {
+            if ($product->weight > 20) {
                 return 500;
             } else {
-                return 100 + $weight * 10;
+                return 100 + $product->weight * 10;
             }
         } else if ($shipper === 'hsinchu') {
-            $size = $length * $width * $height;
-            if ($length > 100 || $width > 100 || $height > 100) {
+            $size = $product->length * $product->width * $product->height;
+            if ($product->length > 100 || $product->width > 100 || $product->height > 100) {
                 return $size * 0.00002 * 1100 + 500;
             } else {
                 return $size * 0.00002 * 1200;
             }
         } else if ($shipper === 'post office') {
-            $feeByWeight = 80 + $weight * 10;
-            $size = $length * $width * $height;
+            $feeByWeight = 80 + $product->weight * 10;
+            $size = $product->length * $product->width * $product->height;
             $feeBySize = $size * 0.00002 * 1100;
 
             return min($feeBySize, $feeByWeight);
