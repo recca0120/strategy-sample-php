@@ -16,12 +16,7 @@ class Cart
         if ($shipper === 'black cat') {
             return $this->feeByBlackCat($product);
         } else if ($shipper === 'hsinchu') {
-            $size = $product->length * $product->width * $product->height;
-            if ($product->length > 100 || $product->width > 100 || $product->height > 100) {
-                return $size * 0.00002 * 1100 + 500;
-            } else {
-                return $size * 0.00002 * 1200;
-            }
+            return $this->feeByHsinchu($product);
         } else if ($shipper === 'post office') {
             $feeByWeight = 80 + $product->weight * 10;
             $size = $product->length * $product->width * $product->height;
@@ -43,6 +38,20 @@ class Cart
             return 500;
         } else {
             return 100 + $product->weight * 10;
+        }
+    }
+
+    /**
+     * @param Product $product
+     * @return float|int
+     */
+    private function feeByHsinchu(Product $product)
+    {
+        $size = $product->length * $product->width * $product->height;
+        if ($product->length > 100 || $product->width > 100 || $product->height > 100) {
+            return $size * 0.00002 * 1100 + 500;
+        } else {
+            return $size * 0.00002 * 1200;
         }
     }
 }
