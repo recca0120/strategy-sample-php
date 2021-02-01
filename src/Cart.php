@@ -16,6 +16,11 @@ class Cart
      */
     public function shippingFee(string $shipper, int $length, int $width, int $height, int $weight)
     {
+        $product = new Product($length, $width, $height, $weight);
+        $length = $product->length;
+        $width = $product->width;
+        $height = $product->height;
+        $weight = $product->weight;
         if ($shipper === 'black cat') {
             if ($weight > 20) {
                 return 500;
