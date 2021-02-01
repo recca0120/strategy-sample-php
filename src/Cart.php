@@ -18,11 +18,7 @@ class Cart
         } else if ($shipper === 'hsinchu') {
             return $this->feeByHsinchu($product);
         } else if ($shipper === 'post office') {
-            $feeByWeight = 80 + $product->weight * 10;
-            $size = $product->length * $product->width * $product->height;
-            $feeBySize = $size * 0.00002 * 1100;
-
-            return min($feeBySize, $feeByWeight);
+            return $this->feeByPostOffice($product);
         } else {
             throw new UnexpectedValueException('shipper not exist');
         }
@@ -53,5 +49,18 @@ class Cart
         } else {
             return $size * 0.00002 * 1200;
         }
+    }
+
+    /**
+     * @param Product $product
+     * @return mixed
+     */
+    private function feeByPostOffice(Product $product)
+    {
+        $feeByWeight = 80 + $product->weight * 10;
+        $size = $product->length * $product->width * $product->height;
+        $feeBySize = $size * 0.00002 * 1100;
+
+        return min($feeBySize, $feeByWeight);
     }
 }
